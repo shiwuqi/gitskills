@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>浅拷贝深拷贝</title>
+	<script src="../wxqqface/js/jquery-1.9.0.js"></script>
+</head>
+<body>
+	<script>
+		// 浅拷贝
+		// 1、Object.assign() 它拷贝的是属性值，若原对象的属性值是一个指向对象的引用，它也只是拷贝那个引用值
+		var a = {a: 'old', b: {c: 'old'}};
+		var b = Object.assign({}, a);
+		b.a = 'new';
+		b.b.c = 'new';
+		console.log(a); // {a: 'old', b: {c: 'new'}}
+		console.log(b); // {a: 'new', b: {c: 'new'}}
+		// 2、Array.prototype.slice() 若原数组中的元素是个对象的引用，slice会拷贝这个对象的引用到新的数组 arrayObject.slice(start,end)
+		var arr = ['a', 'b', {d: 'old'}];
+		var arr1 = arr.slice(1);
+		arr1[1].d = 'new';
+		console.log(arr) // ['a', 'b', {d: 'new'}]
+		// 3、Array.prototype.concat() 若原数组中的元素是个对象的引用，concat会拷贝这个对象的引用到新的数组
+		var arr2 = [{a: 'old'}, 'b', 'c'];
+		var arr3 = [{b: 'old'}, 'd', 'e'];
+		var arr4 = arr2.concat(arr3);
+		console.log(arr4);
+		arr4[0].a = 'new';
+		arr4[3].b = 'new';
+		console.log(arr2);
+		console.log(arr3);
+		// 4、自己实现
+		function copy(obj) {
+			if (!obj || typeof obj !== 'object') {
+				return
+			}
+
+			var newobj = obj.constructor === Array ? [] : {}
+			for(var key in obj) {
+				newobj[key] = obj[key]
+			}
+			return newobj
+		}
+		var obj3 = {b: 'bb', c: 'cc', d: {e: 'ee'}};
+		var obj4 = copy(obj3);
+		obj4.b = 'aa';
+		console.log(obj3); // {b: 'aa', c: 'cc', d: {e: 'ee'}}
+		// 5、jquery $.extend
+		var obj9 = {a: 'old', b: 'old', c: {d: 'old'}, e: undefined};
+		var obj10 = {f: 'old', g: {h: 'old'}};
+		$.extend(obj9, obj10);
+		obj9.g.h = 'new';
+		console.log('obj9', obj9);
+		console.log('obj10',obj10);
+
+		// 深拷贝
+		// 1、JSON.parse() 转换为json对象 JSON.Stringify()转换为json字符串 缺陷： undefined、任意的函数以及symbol值，在序列化过程中会被忽略
+		var obj5 = {a: {b: 'old'}, c: undefined};
+		var obj6 = JSON.parse(JSON.stringify(obj5));
+		obj6.a.b = 'new';
+		console.log(obj5) // {a: {b: 'old'}}
+		console.log(obj6) // {a: {b: 'new'}}
+		// 2、递归
+		function deepCopy(obj) {
+			if (!obj || typeof obj !== 'object') {
+				return
+			}
+			var newObj = obj.constructor === Array ? [] : {}
+			for(var key in obj) {
+				if (obj.hasOwnProperty(key)) {
+					if (obj[key] && typeof obj[key] === 'object') {
+						newObj[key] = obj[key].constructor === Array ? [] : {}
+						newObj[key] = deepCopy(obj[key])
+					} else {
+						newObj[key] = obj[key]
+					}
+				}
+			}
+			return newObj
+		}
+		var obj7 = {a: 'old', b: {c: 'old'}, d: undefined};
+		var obj8 = deepCopy(obj7);
+		obj8.b.c = 'new';
+		console.log(obj7); //{a: 'old', b: {c: 'old'}, d: undefined}
+		console.log(obj8); //{a: 'old', b: {c: 'new'}, d: undefined}
+		// 3、jquery $.extend
+		var obj12 = {a: 'old', b: 'old', c: {d: 'old'}, e: undefined};
+		var obj13 = {f: 'old', g: {h: 'old'}};
+		$.extend(true, obj12, obj13);
+		obj12.g.h = 'new';
+		console.log('obj13', obj13);
+		console.log('obj12', obj12);
+	</script>
+</body>
+</html>
