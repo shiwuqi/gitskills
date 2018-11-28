@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>递归</title>
+</head>
+<body>
+	<script>
+		// 'use strict'
+		function factorial(num) {
+			if (num <= 1) {
+				return 1
+			} else {
+				return num * factorial(num - 1)
+			}
+		}
+		factorial(5) // 120
+
+		// arguments.callee在严格模式下会报错，arguments是个很大对象，每次递归调用时都需要重新创建，影响性能
+		function factorialCallee(num) {
+			if (num <= 1) {
+				return 1
+			} else {
+				return num * arguments.callee(num - 1)
+			}
+		}
+		factorialCallee(5)
+
+		var fn = function(num) {
+			if (num <= 1) {
+				return 1
+			} else {
+				return num * fn(num - 1)
+			}
+		}
+		fn(5) // 120
+
+		function func(num) {
+			if (num <= 1) {
+				return 1
+			}
+			var result = 1;
+			return (function fc(){
+				result *= num
+				num--
+				if (num != 0) {
+					fc()
+				}
+				return result
+			})()
+		}
+		func(5) // 120
+	</script>
+</body>
+</html>
