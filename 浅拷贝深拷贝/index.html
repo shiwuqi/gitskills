@@ -3,9 +3,16 @@
 <head>
 	<meta charset="UTF-8">
 	<title>浅拷贝深拷贝</title>
-	<script src="../wxqqface/js/jquery-1.9.0.js"></script>
+	<script src="../js/jquery-1.9.0.js"></script>
 </head>
 <body>
+	<div class="dv-copy">
+		<ul class="lt-copy">
+			<li>item1</li>
+			<li>item2</li>
+			<li>item3</li>
+		</ul>
+	</div>
 	<script>
 		// 浅拷贝
 		// 1、Object.assign() 它拷贝的是属性值，若原对象的属性值是一个指向对象的引用，它也只是拷贝那个引用值
@@ -88,8 +95,17 @@
 		var obj13 = {f: 'old', g: {h: 'old'}};
 		$.extend(true, obj12, obj13);
 		obj12.g.h = 'new';
-		console.log('obj13', obj13);
-		console.log('obj12', obj12);
+		console.log(obj13); // {f: 'old', g: {h: 'old'}}
+		console.log(obj12); // {a: 'old', b: 'old', c: {d: 'old'}, e: undefined, f: 'old', g: {h: 'new'}}
+
+
+		// node节点的浅拷贝和深拷贝
+		var lt_copy = document.querySelector(".dv-copy").getElementsByTagName('ul')[0];
+		console.log(lt_copy.childNodes.length); // 3(ie＜９)  7(其他浏览器)
+		var deepList = document.querySelector('.lt-copy').cloneNode(true);
+		console.log(deepList.childNodes.length); // 3(ie＜９)  7(其他浏览器) 
+		var shallowList = document.querySelector(".lt-copy").cloneNode(false);
+		console.log(shallowList.childNodes.length); // 0
 	</script>
 </body>
 </html>
