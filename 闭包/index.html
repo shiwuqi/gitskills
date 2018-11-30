@@ -25,12 +25,14 @@
 				console.log(i)   // 10个10
 			})
 		}
+		console.log(i); // 10
 
 		for(let j = 0; j < 10; j++) {// let形成块级作用域，并且变量不会提升
 			setTimeout(function() {
 				console.log(j) // 0-9
 			})
 		}
+		// console.log(j); // 报错 j is not defined
 
 		// JavaScript没有块级作用域，但可以用匿名函数模仿，es6引入let、const可以实现块级作用域
 		(function() {
