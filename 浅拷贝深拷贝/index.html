@@ -99,7 +99,7 @@
 		console.log(obj12); // {a: 'old', b: 'old', c: {d: 'old'}, e: undefined, f: 'old', g: {h: 'new'}}
 
 
-		// node节点的浅拷贝和深拷贝
+		// node节点的浅复制和深复制
 		var deepList = document.querySelector('.lt-copy').cloneNode(true);
 		console.log(deepList.childNodes.length); // 3(ie＜９)  7(其他浏览器) 
 		var shallowList = document.querySelector(".lt-copy").cloneNode(false);
