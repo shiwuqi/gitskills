@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC “-//W3C//DTD XHTML 1.0 Transitional//EN” “http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd”>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -16,12 +16,12 @@
 	<script>
 		// 浅拷贝
 		// 1、Object.assign() 它拷贝的是属性值，若原对象的属性值是一个指向对象的引用，它也只是拷贝那个引用值
-		var a = {a: 'old', b: {c: 'old'}};
-		var b = Object.assign({}, a);
-		b.a = 'new';
-		b.b.c = 'new';
-		console.log(a); // {a: 'old', b: {c: 'new'}}
-		console.log(b); // {a: 'new', b: {c: 'new'}}
+		// var a = {a: 'old', b: {c: 'old'}};
+		// var b = Object.assign({}, a);
+		// b.a = 'new';
+		// b.b.c = 'new';
+		// console.log(a); // {a: 'old', b: {c: 'new'}}
+		// console.log(b); // {a: 'new', b: {c: 'new'}}
 		// 2、Array.prototype.slice() 若原数组中的元素是个对象的引用，slice会拷贝这个对象的引用到新的数组 arrayObject.slice(start,end)
 		var arr = ['a', 'b', {d: 'old'}];
 		var arr1 = arr.slice(1);
@@ -62,11 +62,11 @@
 
 		// 深拷贝
 		// 1、JSON.parse() 转换为json对象 JSON.Stringify()转换为json字符串 缺陷： undefined、任意的函数以及symbol值，在序列化过程中会被忽略
-		var obj5 = {a: {b: 'old'}, c: undefined};
-		var obj6 = JSON.parse(JSON.stringify(obj5));
-		obj6.a.b = 'new';
-		console.log(obj5) // {a: {b: 'old'}}
-		console.log(obj6) // {a: {b: 'new'}}
+		// var obj5 = {a: {b: 'old'}, c: undefined};
+		// var obj6 = JSON.parse(JSON.stringify(obj5));
+		// obj6.a.b = 'new';
+		// console.log(obj5) // {a: {b: 'old'}}
+		// console.log(obj6) // {a: {b: 'new'}}
 		// 2、递归
 		function deepCopy(obj) {
 			if (!obj || typeof obj !== 'object') {
@@ -100,8 +100,6 @@
 
 
 		// node节点的浅拷贝和深拷贝
-		var lt_copy = document.querySelector(".dv-copy").getElementsByTagName('ul')[0];
-		console.log(lt_copy.childNodes.length); // 3(ie＜９)  7(其他浏览器)
 		var deepList = document.querySelector('.lt-copy').cloneNode(true);
 		console.log(deepList.childNodes.length); // 3(ie＜９)  7(其他浏览器) 
 		var shallowList = document.querySelector(".lt-copy").cloneNode(false);
