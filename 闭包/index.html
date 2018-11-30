@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>闭包</title>
+</head>
+
+<body>
+	<script>
+		// 作用域(JavaScript只有全局作用域、函数作用域)
+		var color = 'blue';
+		var num = 0;
+		function changeColor() {
+			var anotherColor = 'green';
+			var color = 'red';
+			console.log(color);
+		}
+		changeColor();// red
+		console.log(color); // blue
+		// console.log(anotherColor); // 报错 anotherColor is not defined
+
+		for(var i = 0; i < 10; i++) {
+			setTimeout(function() {
+				console.log(i)   // 10个10
+			})
+		}
+
+		for(let j = 0; j < 10; j++) {// let形成块级作用域，并且变量不会提升
+			setTimeout(function() {
+				console.log(j) // 0-9
+			})
+		}
+
+		// JavaScript没有块级作用域，但可以用匿名函数模仿，es6引入let、const可以实现块级作用域
+		(function() {
+			// 块级作用域
+		})()
+
+		function chgColor() {
+			var aColor = 'green';
+			return function () {
+				// 能够访问到color、aColor
+				console.log(aColor);
+			}
+		}
+		var result = chgColor();
+		result(); // green
+
+		function chgNum() {
+			var num = 0;
+			return function(val) {
+				return num += val
+			}
+		}
+		var add = chgNum();
+		console.log(add(10)); // 10
+
+		// 闭包是指有权访问另一个函数作用域中的变量的函数。创建闭包的常见方式，是在一个函数内部创建另一个函数
+		// 闭包会携带包含它的函数的作用域，内存内存会比其他函数占用更多。慎重使用
+		var makeCounter = function () {
+			var privateCounter = 0; // 私有变量
+			function changeBy(val) { // 私有函数
+				privateCounter += val;
+			}
+			return {// increment、decrement、value是共享同一个环境的闭包，它们都可以访问privateCounter变量和changeBy函数
+				increment: function () {
+					changeBy(1);
+				},
+				decrement: function () {
+					changeBy(-1);
+				},
+				value: function () {
+					return privateCounter;
+				}
+			}
+		};
+
+		var Counter1 = makeCounter();
+		var Counter2 = makeCounter();
+		console.log(Counter1.value()); // 0
+		Counter1.increment();
+		Counter1.increment();
+		console.log(Counter1.value()); // 2
+		Counter1.decrement();
+		Counter2.decrement();
+		console.log(Counter1.value()); // 1
+		console.log(Counter2.value()); // -1
+	</script>
+</body>
+
+</html>
