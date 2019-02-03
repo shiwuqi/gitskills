@@ -1,4 +1,5 @@
 新建分支dev：git checkout -b dev
+第一次推送分支到远程：git push --set-upstream origin dev
 切换分支dev：git checkout dev
 查看当前分支状态：git status
 合并分支：git status => 转到要合并的分支 git checkout dev => 拉取分支代码 git pull => 转到当前分支 git checkout master => 合并分支 git merge dev => 提交 git add . && git commit -m '日志' => 提交到远程 git push
@@ -7,3 +8,6 @@
 查看远程分支：git branch -a
 查看本地分支：git branch
 回退版本：git reset --hard head
+第一次拉取分支：git pull origin dev_zmy
+删除远程分支：git push origin :dev
+删除本地分支：git branch -d dev
