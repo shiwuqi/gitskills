@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>圣杯布局</title>
+  <style>
+    .container {
+      padding: 0 300px;
+    }
+    .main, .left, .right {
+      position: relative;
+      min-height: 300px;
+      float: left;
+      text-align: center;
+      color: #fff;
+    }
+    .left {
+      left: -300px;
+      margin-left: -100%;
+      background: #F59000;
+      width: 300px;
+    }
+    .right {
+      right: -300px;
+      margin-left: -300px;
+      background: #5376DB;
+      width: 300px;
+    }
+    .main {
+      background: #C483BC;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="main">main</div>
+    <div class="left">left</div>
+    <div class="right">right</div>
+  </div>
+</body>
+</html>
