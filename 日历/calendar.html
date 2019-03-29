@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>日历</title>
+  <style>
+    #app {
+      width: 375px;
+      height: 100%;
+    }
+    ul, li {
+      list-style-type: none;
+    }
+
+    .dt-week,
+    .dt-time {
+      width: 100%;
+    }
+
+    .dt-week ul,
+    .dt-time ul {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .dt-next {
+      display: flex;
+      justify-content: center;
+    }
+
+    .dt-next div {
+      margin-left: 30px;
+    }
+
+    .dt-week ul li,
+    .dt-time ul li {
+      width: 14%;
+    }
+
+    .dt-btn {
+      width: 100%;
+      text-align: center;
+    }
+    
+    .dt-shallow {
+      color: #AFB2B3;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="dt-next">
+      <div @click="handlePre">上个月</div>
+      <div>{{opt.year}}年{{opt.month}}月</div>
+      <div @click="handleNext">下个月</div>
+    </div>
+    <div class="dt-week">
+      <ul>
+        <li v-for="(item, index) in weeks" :key="index">{{item}}</li>
+      </ul>
+    </div>
+    <div class="dt-time">
+      <ul>
+        <li v-for="(item, index) in dateArr" :key="index" :class="item.preOrNextDay ? 'dt-shallow' : ''">{{item.day}}</li>
+      </ul>
+    </div>
+    <div class="dt-btn">
+      <button @click="handleSwitch">{{btnText}}</button>
+    </div>
+  </div>
+  <script src='../js/calendar.js'></script>
+  <script src="../js/vue.min.js"></script>
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data() {
+        return {
+          weeks: ['日', '一', '二', '三', '四', '五', '六'],
+          dateArr: [],
+          opt: {
+            year: '',
+            month: '',
+            all: false
+          },
+          btnText: '显示上下月日期'
+        }
+      },
+      created() {
+        var date = new Date()
+        this.opt.year = date.getFullYear()
+        this.opt.month = addZero(date.getMonth() + 1)  // 月份+1
+        this.dateArr = initDate(this.opt)
+      },
+      methods: {
+        // 上个月
+        handlePre() {
+          var preMonth = Number(this.opt.month) - 1
+          this.opt.year = !preMonth ? Number(this.opt.year) - 1 : this.opt.year
+          this.opt.month = !preMonth ? 12 : preMonth
+          this.dateArr = initDate(this.opt)
+        },
+
+        // 下个月
+        handleNext() {
+          var nextMonth = Number(this.opt.month) + 1
+          this.opt.year = nextMonth === 13 ? Number(this.opt.year) + 1 : this.opt.year
+          this.opt.month = nextMonth === 13 ? 1 : nextMonth
+          this.opt.dateArr = initDate(this.opt)
+        },
+
+        // 切换是否显示隐藏上下月数据
+        handleSwitch() {
+          this.opt.all = !this.opt.all
+          this.btnText = this.opt.all ? '隐藏上下月日期' : '显示上下月日期'
+          this.dateArr = initDate(this.opt)
+        }
+      }
+    })
+  </script>
+</body>
+</html>
