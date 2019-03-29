@@ -108,7 +108,7 @@
           var nextMonth = Number(this.opt.month) + 1
           this.opt.year = nextMonth === 13 ? Number(this.opt.year) + 1 : this.opt.year
           this.opt.month = nextMonth === 13 ? 1 : nextMonth
-          this.opt.dateArr = initDate(this.opt)
+          this.dateArr = initDate(this.opt)
         },
 
         // 切换是否显示隐藏上下月数据
