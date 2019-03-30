@@ -1,0 +1,7 @@
+<!--pages/interview/index/index.wxml-->
+<view class='container'>
+  <view class='it-calendar'>
+    <calendar bind:handleSelectedDay="handleSelectedDay">
+    </calendar>
+  </view>
+</view>

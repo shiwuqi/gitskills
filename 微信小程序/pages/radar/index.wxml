@@ -1,0 +1,4 @@
+<!--pages/radar/index.wxml-->
+<view class='container'>
+  <ec-canvas id="mychart-dom-radar" canvas-id="mychart-radar" ec="{{ ec }}"></ec-canvas>
+</view>

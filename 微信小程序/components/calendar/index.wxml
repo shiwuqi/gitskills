@@ -1,0 +1,69 @@
+<!--components/calendar/index.wxml-->
+<!-- 日历 -->
+<slot name="header"></slot>
+<view class='calendar-date'>
+  <view>{{year}}年{{month}}月</view>
+</view>
+<!-- 星期 -->
+<view class='header'>
+  <view wx:for='{{date}}' wx:key='item' class="weekMark {{item === '日' || item === '六' ? 'week-disabled' : ''}}">{{item}}</view>
+</view>
+<swiper class='calendar-swiper' circular='true' current='{{swiperIndex}}' bindchange='swiperChange'>
+  <swiper-item>
+    <view class='calendar'>
+      <!-- 日期 -->
+      <view class='date-box'>
+        <block wx:for='{{calendar.first}}' wx:key='{{index}}'>
+          <view class='{{isToday === item.date ? "nowDay" : ""}}' data-year='{{year}}' data-month='{{item.month}}' data-datenum='{{item.date}}' data-day="{{item.day}}" data-preornextday='{{item.preOrNextDay}}' data-type='first' bindtap='handleClickSelected'>
+            <view class='date-head {{item.preOrNextDay ? "week-disabled" : ""}}'>
+              <view class='{{(selectedDate === item.day) && (item.preOrNextDay === 0) ? "box-selected" : ""}}'>{{item.day}}</view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </swiper-item>
+  <swiper-item>
+    <view class='calendar'>
+      <!-- 日期 -->
+      <view class='date-box'>
+        <block wx:for='{{calendar.second}}' wx:key='{{index}}'>
+          <view class='{{isToday === item.date ? "nowDay" : ""}}' data-year='{{year}}' data-month='{{item.month}}' data-datenum='{{item.date}}' data-day="{{item.day}}"  data-preornextday='{{item.preOrNextDay}}' data-type='second' bindtap='handleClickSelected'>
+            <view class='date-head {{item.preOrNextDay ? "week-disabled" : ""}}'>
+              <view class='{{(selectedDate === item.day) && (item.preOrNextDay === 0) ? "box-selected" : ""}}'>{{item.day}}</view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </swiper-item>
+  <swiper-item>
+    <view class='calendar'>
+      <!-- 日期 -->
+      <view class='date-box'>
+        <block wx:for='{{calendar.third}}' wx:key='{{index}}'>
+          <view class='{{isToday === item.date ? "nowDay" : ""}}' data-year='{{year}}' data-month='{{item.month}}' data-datenum='{{item.date}}' data-day="{{item.day}}"  data-preornextday='{{item.preOrNextDay}}' data-type='third' bindtap='handleClickSelected'>
+            <view class='date-head {{item.preOrNextDay ? "week-disabled" : ""}}'>
+              <view class='{{(selectedDate === item.day) && (item.preOrNextDay === 0) ? "box-selected" : ""}}'>{{item.day}}</view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </swiper-item>
+  <swiper-item>
+    <view class='calendar'>
+      <!-- 日期 -->
+      <view class='date-box'>
+        <block wx:for='{{calendar.fourth}}' wx:key='{{index}}'>
+          <view class='{{isToday === item.date ? "nowDay" : ""}}' data-year='{{year}}' data-month='{{item.month}}' data-day="{{item.day}}" data-datenum='{{item.date}}'  data-preornextday='{{item.preOrNextDay}}' data-type='fourth' bindtap='handleClickSelected'>
+            <view class='date-head {{item.preOrNextDay ? "week-disabled" : ""}}'>
+              <view class='{{(selectedDate === item.day) && (item.preOrNextDay === 0) ? "box-selected" : ""}}'>{{item.day}}</view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </swiper-item>
+</swiper>
+<slot name="footer"></slot>

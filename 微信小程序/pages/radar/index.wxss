@@ -1,0 +1,6 @@
+/* pages/radar/index.wxss */
+#mychart-dom-radar {
+  width: 100%;
+  height: 580rpx;
+  display: block;
+}
