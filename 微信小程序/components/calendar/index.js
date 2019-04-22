@@ -149,7 +149,6 @@ Component({
         changeYear: year,
         changeMonth: addZero(month),
       }
-      this.triggerEvent('handleChangeMonth', _data)
     },
     tapNext() {
       const {
@@ -173,7 +172,6 @@ Component({
         changeYear: year,
         changeMonth: addZero(month),
       }
-      this.triggerEvent('handleChangeMonth', _data)
     },
 
     handleClickSelected(e) {
@@ -205,8 +203,6 @@ Component({
         changeYear: year,
         changeMonth: addZero(month),
       }
-      this.triggerEvent('handleChangeMonth', _data)
-      this.triggerEvent('handleSelectedDay', _data)
     }
   }
 })
