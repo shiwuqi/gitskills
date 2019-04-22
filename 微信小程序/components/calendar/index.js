@@ -1,5 +1,9 @@
 // components/calendar/index.js
-const { initDate, addZero, formatMonth } = require('../../utils/calendar.js')
+const {
+  initDate,
+  addZero,
+  formatMonth
+} = require('../../utils/calendar.js')
 
 Component({
   options: {
@@ -18,19 +22,18 @@ Component({
   },
   data: {
     date: ['日', '一', '二', '三', '四', '五', '六'],
+    // 左右滑动的class样式
+    slideOne: "",
+    slideTwo: "",
+    // 左右滑动定义的状态变量
+    slideFlag: false,
     isToday: 0,
     isTodayWeek: false,
-    selectedDate: -1,
+    selectedDate: '1970-01-01',
     swiperIndex: 1,
-    calendar: {
-      first: [],
-      second: [],
-      third: [],
-      fourth: [],
-    },
+    calendar: [],
     year: 0,
     month: 0,
-    swiperMap: ['first', 'second', 'third', 'fourth'],
   },
 
   lifetimes: {
@@ -41,87 +44,168 @@ Component({
       if (this.data.defaultYear && this.data.defaultMonth) {
         this.setData({
           isToday: year + '-' + month + '-' + now.getDate(),
-          calendar: this.getCalendarDate({ year: this.data.year, month: Number(this.data.month), all: true })
+          calendar: initDate(formatMonth({
+            year: this.data.defaultYear,
+            month: Number(this.data.defaultMonth),
+            all: 'all'
+          }))
         })
       } else {
         this.setData({
           year: year,
           month: month,
           isToday: year + '-' + month + '-' + now.getDate(),
-          calendar: this.getCalendarDate({ year, month: Number(month), all: true })
+          selectedDate: year + '-' + month + '-' + now.getDate(),
+          calendar: initDate(formatMonth({
+            year,
+            month: Number(month),
+            all: 'all'
+          }))
         })
       }
     },
   },
 
   methods: {
-    // 首次加载前中后三个月的数据
-    getCalendarDate(opt) {
-      const { year, month } = opt
-      const first = initDate(formatMonth({ ...opt, year: opt.year, month: Number(opt.month) - 1 }))
-      const second = initDate(formatMonth({ ...opt }))
-      const third = initDate(formatMonth({ ...opt, year: opt.year, month: Number(opt.month) + 1 }))
-      return { first, second, third, fourth: [] }
+    /**
+     * 日历滑动的特效处理函数
+     */
+    touchStart(e) {
+      this.setData({
+        startX: e.changedTouches[0].pageX
+      })
     },
-
-    // swiper滑动
-    swiperChange(e) {
-      const lastIndex = this.data.swiperIndex
-        , currentIndex = e.detail.current
-      let flag = false
-        , { year, month, calendar, swiperMap } = this.data
-        , change = swiperMap[(lastIndex + 2) % 4]
-      if (lastIndex > currentIndex) {
-        lastIndex === 3 && currentIndex === 0
-          ? flag = true
-          : null
-      } else {
-        lastIndex === 0 && currentIndex === 3
-          ? null
-          : flag = true
+    touchEnd(e) {
+      const _this = this
+      if (!this.data.slideFlag) {
+        this.setData({
+          slideFlag: true,
+          endX: e.changedTouches[0].pageX
+        })
+        let disX = e.changedTouches[0].pageX - this.data.startX;
+        if (disX < -50) {
+          console.log("----------> 左滑")
+          this.setData({
+            slideOne: "animated fadeOutLeft",
+            slideTwo: "animated fadeInRight"
+          })
+          this.tapNext();
+          // setTimeout(() => {
+          //   this.tapNext();
+          // }, 300);
+          setTimeout(() => {
+            _this.setData({
+              slideFlag: false,
+              slideOne: "",
+              slideTwo: ""
+            })
+          }, 500);
+        } else if (disX > 50) {
+          console.log("-----------> 右滑")
+          this.setData({
+            slideOne: "animated fadeOutRight",
+            slideTwo: "animated fadeInLeft"
+          })
+          this.tapPrev()
+          // setTimeout(() => {
+          //   this.tapPrev();
+          // }, 300);
+          setTimeout(() => {
+            _this.setData({
+              slideFlag: false,
+              slideOne: "",
+              slideTwo: ""
+            })
+          }, 500);
+        } else {
+          this.setData({
+            slideFlag: false
+          })
+        }
       }
-      let queryYear = 0, queryMonth = 0;
-      if (flag) {
-        queryYear = Number(month) + 2 > 12 ? Number(year) + 1 : year
-        year = Number(month) + 1 > 12 ? Number(year) + 1 : year
-        queryMonth = Number(month) === 11 ? 1 : Number(month) === 12 ? 2 : Number(month) + 2
-        month = Number(month) + 1 > 12 ? 1 : Number(month) + 1
-      } else {
-        queryYear = Number(month) - 2 < 1 ? Number(year) - 1 : year
-        year = Number(month) - 1 < 1 ? Number(year) - 1 : year
-        queryMonth = Number(month) === 2 ? 12 : Number(month) === 1 ? 11 : Number(month) - 2
-        month = Number(month) - 1 < 1 ? 12 : Number(month) - 1
-      }
-      calendar[change] = initDate({ year: queryYear, month: queryMonth, all: true })
+    },
+    /**
+     * 左右滑动调用的函数
+     */
+    tapPrev() {
+      const {
+        year,
+        month
+      } = formatMonth({
+        year: this.data.year,
+        month: (Number(this.data.month) - 1)
+      })
+      const calendar = initDate({
+        all: 'all',
+        year,
+        month
+      })
       this.setData({
         calendar,
-        swiperIndex: currentIndex,
         year,
-        month,
+        month
       })
+      const _data = {
+        changeYear: year,
+        changeMonth: addZero(month),
+      }
+      this.triggerEvent('handleChangeMonth', _data)
+    },
+    tapNext() {
+      const {
+        year,
+        month
+      } = formatMonth({
+        year: this.data.year,
+        month: (Number(this.data.month) + 1)
+      })
+      const calendar = initDate({
+        all: 'all',
+        year,
+        month
+      })
+      this.setData({
+        calendar,
+        year,
+        month
+      })
+      const _data = {
+        changeYear: year,
+        changeMonth: addZero(month),
+      }
+      this.triggerEvent('handleChangeMonth', _data)
     },
 
     handleClickSelected(e) {
-      // console.log(e)
-      const { year, month, day, date, preornextday, type } = e.currentTarget.dataset
-      let obj = {}
-      if (preornextday === -1 || preornextday === 1) {
-        this.setData({
-          year: year,
-          month: month,
-          calendar: this.getCalendarDate({ year, month, all: true })
-        })
-      }
-      this.setData({
-        selectedDate: day
-      })
-      console.log(this.data.selectedDate)
-      const _data = {
+      const {
         year,
         month,
         day,
-        date,
+        datenum,
+        preornextday,
+        type
+      } = e.currentTarget.dataset
+      let obj = {}
+      if (preornextday === -1) {
+        this.tapPrev()
+        // this.triggerEvent('handleChangeMonth', {
+        //   changeYear: year, changeMonth: month
+        // })
+      } else if (preornextday === 1) {
+        this.tapNext()
       }
+      this.setData({
+        selectedDate: datenum
+      })
+      const _data = {
+        year,
+        month,
+        day: addZero(day),
+        datenum,
+        changeYear: year,
+        changeMonth: addZero(month),
+      }
+      this.triggerEvent('handleChangeMonth', _data)
       this.triggerEvent('handleSelectedDay', _data)
     }
   }

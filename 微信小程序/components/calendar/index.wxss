@@ -1,10 +1,6 @@
-/* components/calendar/index.wxss */
 .calendar-date {
   width: 100%;
   text-align: center;
-  padding: 20rpx 0;
-  font-size: 36rpx;
-  color: #3E4040;
 }
 
 .calendar_title {
@@ -22,17 +18,22 @@
 
 /* 日历 */
 
-.calendar-swiper {
+.layout_body .date_container {
+  border-radius: 8rpx;
+  text-align: center;
+  position: relative;
   height: 400rpx;
+  font-size: 32rpx;
+  overflow: hidden;
 }
 
-.calendar {
-  width: 100%;
-  background: #fff;
-  border-bottom-right-radius: 20rpx;
-  border-bottom-left-radius: 20rpx;
-  padding: 0 0 20rpx;
-  font-family: FZZhunYuan-M02S;
+.layout_body .date_container .date_box2 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  opacity: 0;
 }
 
 .header {
@@ -50,7 +51,7 @@
 }
 
 .week-disabled {
-  color: #AFB2B3;
+  color: #afb2b3;
 }
 
 .weekMark {
@@ -91,8 +92,9 @@
   width: 60rpx;
   border-radius: 50%;
   text-align: center;
+  /* border: 1rpx solid #45C8DC; */
   color: #fff;
-  background-color: #45C8DC;
+  background-color: #45c8dc;
   margin: 0 auto;
 }
 
@@ -101,6 +103,7 @@
   border-radius: 50%;
   text-align: center;
   margin: 0 auto;
-  border: 1rpx solid #45C8DC;
-  color: #45C8DC;
+  border: 1rpx solid #45c8dc;
+  background: #fff;
+  color: #45c8dc;
 }
