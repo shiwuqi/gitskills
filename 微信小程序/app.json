@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/calendar/index",
-    "pages/radar/index"
+    "pages/radar/index",
+    "pages/remove/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

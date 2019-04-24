@@ -1,0 +1,83 @@
+/* pages/remove/index.wxss */
+
+.cm-list_personal {
+  position: relative;
+}
+
+.cn-list-personal_detail {
+  position: relative;
+  display: flex;
+  padding: 16rpx 30rpx;
+}
+
+.cn-list-personal_detail::before {
+  content: '';
+  position: absolute;
+  top: 131rpx;
+  right: 0;
+  width: 595rpx;
+  height: 1rpx;
+  background: #e3e5e6;
+}
+
+.cn-list-personal_detail:last-child:before {
+  height: 0;
+}
+
+.cm-list-personal_avatar {
+  position: relative;
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.cm-list-personal_avatar image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.cm-list-personal_info {
+  margin-left: 26rpx;
+}
+
+.cm-personal-info_title text:first-child {
+  font-size: 36rpx;
+  color: #3e4040;
+  vertical-align: 10%;
+}
+
+.cm-personal-info_subtitle {
+  width: 380rpx;
+  margin-top: 6rpx;
+  font-size: 26rpx;
+  color: #7d7f80;
+}
+
+.cm-personal-info_subtitle view {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cm-list_no {
+  width: 100%;
+  text-align: center;
+  margin-top: 480rpx;
+  font-size: 32rpx;
+  color: #afb2b3;
+}
+
+.remove {
+  width: 132rpx;  
+  height: 100%;  
+  background-color: red; 
+  color: white; 
+  position: absolute;  
+  top: 0;  
+  right: -140rpx;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;
+  font-size: 30rpx;
+}

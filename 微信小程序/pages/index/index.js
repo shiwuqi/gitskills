@@ -10,6 +10,10 @@ const lists = [
   {
     name: '雷达图',
     value: 'radar'
+  },
+  {
+    name: '左滑删除',
+    value: 'remove'
   }
 ]
 

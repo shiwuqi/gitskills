@@ -1,0 +1,21 @@
+<!--pages/remove/index.wxml-->
+<view class='cm-list'>
+  <view class='cm-list_personal' wx:for="{{lists}}" wx:key="{{item.id}}" style="right:{{item.right}}rpx">
+    <view class='cn-list-personal_detail' data-index="{{index}}" catchtouchstart="touchStart" catchtouchmove="touchMove" catchtouchend="touchEnd">
+      <view class='cm-list-personal_avatar'>
+        <image src='{{item.avatar}}'></image>
+      </view>
+      <view class='cm-list-personal_info'>
+        <view class='cm-personal-info_title'>
+          <text>{{item.name}}</text>
+        </view>
+        <view class='cm-personal-info_subtitle'>
+          <view>{{item.text}}</view>
+        </view>
+      </view>
+    </view>
+    <view class='remove' data-index='{{index}}' data-id='{{item.id}}' catchtap='handleRemove'>
+        {{item.removeInfo}}
+    </view>
+  </view>
+</view>
