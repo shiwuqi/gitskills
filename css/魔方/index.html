@@ -1,180 +1,217 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        ul{
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-        .box{
-            width: 300px;
-            height: 300px;
-            margin: 200px auto;
-            position: relative;
-            font-size: 50px;
-            transform-style: preserve-3d;
-            /*动画效果*/
-            animation: rotate 10s linear infinite; 
-        }
-        .box>div{
-            width: 300px;
-            height: 300px;
-            position: absolute;
-        }
-        li{
-            float: left;
-            width: 90px;
-            height: 90px;
-            margin: 5px;
-            border-radius: 20px;
-            line-height: 90px;
-            text-align: center;
-        }
-        .dv1 li{
-            background-color: orange;
-            transform: skewZ(60deg);
-        }
-        .dv1{
-            background-color: transparent;
-            transform: rotateY(90deg) translateZ(150px);
-        }
-        .dv2{
-            background-color: transparent;
-            transform: rotateY(-90deg) translateZ(150px);
-        }
-        .dv3{
-            background-color: transparent;
-            transform: rotateX(90deg) translateZ(150px);
-        }
-        .dv4{
-            background-color: transparent;
-            transform: rotateX(-90deg) translateZ(150px);
-        }
-        .dv5{
-            background-color: transparent;
-            transform:translateZ(150px);
-        }
-        .dv6{
-            background-color: transparent;
-            transform:translateZ(-150px);
-        }
- 
-        .dv2 li{
-            background-color: green;
-        }
-        .dv3 li{
-            background-color: greenyellow;
-        }
-        .dv4 li{
-            background-color: palevioletred;
-        }
-        .dv5 li{
-            background-color: pink;
-        }
-        .dv6 li{
-            background-color: yellow;
-        }
-        .box:hover .dv1 {
-          transform: rotateY(0deg) translateZ(300px);
-        }
-        .box:hover .dv2 {
-          transform: translateZ(-300px) rotateY(180deg);
-        }
-        .box:hover .dv3 {
-          transform: rotateY(-90deg) translateZ(300px);
-        }
-        .box:hover .dv4 {
-          transform: rotateY(90deg) translateZ(300px);
-        }
-        .box:hover .dv5 {
-          transform: rotateX(90deg) translateZ(300px);
-        }
-        .box:hover .dv6 {
-          transform: rotateX(-90deg) translateZ(300px);
-        }
-        @keyframes rotate{
-            0%{
-                transform: rotateY(0deg) rotateX(0deg);
-            }
-            100%{
-                transform: rotateY(360deg) rotateX(360deg);
-            }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>魔方</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .box {
+      width: 300px;
+      height: 300px;
+      margin: 200px auto;
+      position: relative;
+      font-size: 50px;
+      transform-style: preserve-3d;
+      /*动画效果*/
+      animation: rotate 10s linear infinite;
+    }
+
+    .box > div {
+      width: 300px;
+      height: 300px;
+      position: absolute;
+    }
+
+    li {
+      float: left;
+      width: 90px;
+      height: 90px;
+      margin: 5px;
+      border-radius: 20px;
+      line-height: 90px;
+      text-align: center;
+    }
+
+    .dv1 li {
+      background-color: orange;
+      transform: skewZ(60deg);
+    }
+
+    .dv1 {
+      background-color: transparent;
+      transform: rotateY(90deg) translateZ(150px);
+    }
+
+    .dv2 {
+      background-color: transparent;
+      transform: rotateY(-90deg) translateZ(150px);
+    }
+
+    .dv3 {
+      background-color: transparent;
+      transform: rotateX(90deg) translateZ(150px);
+    }
+
+    .dv4 {
+      background-color: transparent;
+      transform: rotateX(-90deg) translateZ(150px);
+    }
+
+    .dv5 {
+      background-color: transparent;
+      transform: translateZ(150px);
+    }
+
+    .dv6 {
+      background-color: transparent;
+      transform: translateZ(-150px);
+    }
+
+    .dv2 li {
+      background-color: green;
+    }
+
+    .dv3 li {
+      background-color: greenyellow;
+    }
+
+    .dv4 li {
+      background-color: palevioletred;
+    }
+
+    .dv5 li {
+      background-color: pink;
+    }
+
+    .dv6 li {
+      background-color: yellow;
+    }
+
+    .box:hover .dv1 {
+      transform: rotateY(0deg) translateZ(300px);
+    }
+
+    .box:hover .dv2 {
+      transform: translateZ(-300px) rotateY(180deg);
+    }
+
+    .box:hover .dv3 {
+      transform: rotateY(-90deg) translateZ(300px);
+    }
+
+    .box:hover .dv4 {
+      transform: rotateY(90deg) translateZ(300px);
+    }
+
+    .box:hover .dv5 {
+      transform: rotateX(90deg) translateZ(300px);
+    }
+
+    .box:hover .dv6 {
+      transform: rotateX(-90deg) translateZ(300px);
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+      }
+
+      100% {
+        transform: rotateX(360deg) rotateY(360deg) rotateZ(0deg);
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="box">
-        <div class="dv1"><ul>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-            <li>5</li>
-            <li>6</li>
-            <li>7</li>
-            <li>8</li>
-            <li>9</li>
-        </ul></div>
-        <div class="dv2"><ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-                <li>8</li>
-                <li>9</li>
-            </ul></div>
-        <div class="dv3"><ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-                <li>8</li>
-                <li>9</li>
-            </ul></div>
-        <div class="dv4"><ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-                <li>8</li>
-                <li>9</li>
-            </ul></div>
-        <div class="dv5"><ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-                <li>8</li>
-                <li>9</li>
-            </ul></div>
-        <div class="dv6"><ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-                <li>8</li>
-                <li>9</li>
-            </ul></div>
+  <div class="box">
+    <div class="dv1">
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+      </ul>
     </div>
+    <div class="dv2">
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+      </ul>
+    </div>
+    <div class="dv3">
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+      </ul>
+    </div>
+    <div class="dv4">
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+      </ul>
+    </div>
+    <div class="dv5">
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+      </ul>
+    </div>
+    <div class="dv6">
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+      </ul>
+    </div>
+  </div>
 </body>
+
 </html>
