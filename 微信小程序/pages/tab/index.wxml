@@ -1,0 +1,10 @@
+<!--pages/tab/index.wxml-->
+<view class='container'>
+  <scroll-view class='scroll' scroll-x  scroll-into-view="{{scrollSelected}}">
+    <view class='tab'>
+      <view wx:for="{{tabItems}}" wx:key="{{index}}" class='tab-item' id="{{'a' + item.id}}" data-id="{{item.id}}" data-index="{{index}}" bindtap='handleTab'>
+        <view class="{{tabSelected === item.id ? 'active' : ''}}">{{item.name}}</view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

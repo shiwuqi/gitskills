@@ -1,0 +1,33 @@
+/* pages/tab/index.wxss */
+.container {
+  width: 100%;
+  height: 100vh;
+  background: #F8F8F8;
+}
+
+.scroll {
+  position: relative;
+  width: 100%;
+  white-space: nowrap;
+  background: #fff;
+}
+
+.tab {
+  display: flex;
+  font-size: 30rpx;
+}
+
+.tab-item {
+  height: 94rpx;
+  line-height: 94rpx;
+  padding: 0 30rpx;
+}
+
+.tab-item view {
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.active {
+  border-bottom: 4rpx solid red;
+}

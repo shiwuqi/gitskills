@@ -14,6 +14,10 @@ const lists = [
   {
     name: '左滑删除',
     value: 'remove'
+  },
+  {
+    name: 'tab栏',
+    value: 'tab'
   }
 ]
 
