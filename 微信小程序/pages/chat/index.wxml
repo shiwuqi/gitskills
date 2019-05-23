@@ -1,0 +1,30 @@
+<!--pages/chat/index.wxml-->
+<view class='container'>
+  <scroll-view class='ct-content' scroll-y='true' style="height: {{contentHeight}}px" scroll-into-view="{{toView}}" upper-threshold='10' bindscrolltoupper='handleScrollToupper' bindscroll='handleScroll'>
+    <view class='ct-content-chat' style="height: {{contentHeight}}px">
+      <view wx:if="{{isLoadMore}}" class='ct-loadMore'>正在加载中...</view>
+      <view wx:if="{{loadMore.pageNo >= totalPages}}" class='ct-loadMore'>暂无更多数据</view>
+      <view wx:for="{{messages}}" wx:key='{{index}}' id='ct-{{item.id}}' class='ct-messages'>
+        <view class='ct-content-time' wx:if="{{item.isTime}}">
+          {{item.message}}
+        </view>
+        <view class='ct-content-left' wx:if="{{item.direct}}">
+          <image src='{{item.icon}}'></image>
+          <view>
+            {{item.message}}
+          </view>
+        </view>
+        <view class='ct-content-right' wx:if="{{!item.direct}}">
+          <view>
+            {{item.message}}
+          </view>
+          <image src='{{item.icon}}'></image>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <view class='ct-tool' style="bottom:{{inputBottom}}px">
+    <input placeholder-class='ct-tool-input_ph' class='ct-tool-input'  value='{{chatMessage}}' bindinput='handleInput' bindconfirm='handleConfirm' focus="{{onFocus}}" confirm-hold="true"></input>
+  </view>
+</view>
+

@@ -4,7 +4,8 @@
     "pages/calendar/index",
     "pages/radar/index",
     "pages/remove/index",
-    "pages/tab/index"
+    "pages/tab/index",
+    "pages/chat/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

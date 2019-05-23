@@ -1,10 +1,29 @@
 //app.js
 App({
   onLaunch: function () {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+
+    // 获取系统信息: 微信版本 高度 宽度
+    wx.getSystemInfo({
+      success: res => {
+        // 微信基础版本不能低于1.1
+        if (!res.SDKVersion || (res.SDKVersion.split('.')[1] < 1 && res.SDKVersion.split('.')[0] <= 1)) {
+          wx.showModal({
+            title: '警告',
+            content: '您的微信版本过低！严重影响您的使用体验，建议及时升级',
+            showCancel: false,
+            confirmText: '知道了'
+          })
+        }
+        // 将宽高、微信版本号写入全局
+        this.globalData.systemInfo = {
+          width: res.windowWidth,
+          height: res.windowHeight,
+          pixelRatio: res.pixelRatio,
+          SDKVersion: res.SDKVersion,
+          system: res.platform
+        }
+      }
+    }),
 
     // 登录
     wx.login({
@@ -34,6 +53,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: {},
+    systemInfo: {}, // 系统基本信息
   }
 })
