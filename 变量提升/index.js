@@ -21,3 +21,21 @@ var name = 'Tom';
 a = 2;
 var a;
 console.log(a);
+
+/**
+ * 注意：
+ * 1、函数声明会被提升，但是函数表达式不会被提升
+ * 2、函数声明和变量声明都会被提升，但函数首先会被提升
+ */
+
+foo1() // 函数声明
+
+function foo1() {
+    console.log('函数声明')
+}
+
+foo2()  // TypeError: foo2 is not a function
+
+var foo2 = function () {
+    console.log('函数表达式')
+}
