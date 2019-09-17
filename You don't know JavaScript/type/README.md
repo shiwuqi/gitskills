@@ -1,14 +1,12 @@
-### JavaScript常用的原生类型
- * String()
- * Number()
- * Boolean()
- * Array()
- * Object()
- * Function()
- * RegExp()
- * Date()
- * Error()
- * Symbol()
+### JavaScript类型
+ * String
+ * Number
+ * Boolean
+ * Array
+ * Object
+ * undefined
+ * null
+ * Symbol
 
 ### 判断类型
  1、typeof
@@ -39,6 +37,7 @@
   foo instanceof Bar() // false
   foo instanceof Object // true
   {} instanceof Object // 报语法错误，{}是空对象也是空的代码块，js无法识别
+  [] instanceof Array // true
   ```
  3、Object.prototype.toString.call()
   ```javascript
