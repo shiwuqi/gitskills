@@ -4,8 +4,8 @@
  * Boolean
  * Array
  * Object
- * undefined
- * null
+ * undefined 指没有值或从未赋值
+ * null 指空值或曾赋值过，但目前没有值
  * Symbol
 
 ### 判断类型
@@ -50,5 +50,7 @@
   Object.prototype.toString.call(null) // [object Null]
   Object.prototype.toString.call(function(){}) // [object Function]
   Object.prototype.toString.call(Symbol(1)) // [object Symbol]
+  Object.prototype.toString.call( /regex-literal/i ) // [object RegExp]
+  Object.prototype.toSTring.call(new Date()) // [object Date]
   ```
 
