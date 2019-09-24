@@ -15,7 +15,6 @@
       delete context.fn; // 删除fn，否则cotext会多了一个fn，或者fn用Symbol类型
       return result;
     }
-
     Function.prototype.sCall = function(context, ...args) {
       context = context || window;
       var fn = Symbol();
@@ -23,7 +22,6 @@
       var result = context.fn(...args);
       return result;
     }
-
     Function.prototype.myApply = function(context, args) {
       context = context || window;
       context.fn = this;
@@ -31,7 +29,6 @@
       delete context.fn;
       return result;
     }
-
     Function.prototype.myBind = function(context) {
       context = context || window;
       var args = Array.from(arguments).slice(1);
@@ -41,20 +38,16 @@
         return allArgs.length > 0 ? context.fn(...allArgs) : context.fn();
       }
     }
-
     function theFunction(name, profession) {
       console.log("My name is " + name + " and I am a " + profession + ".");
     }
-
     function func() {
       console.log("My name is " + this.name + " and I am a " + this.profession +".");
     }
-
     var obj = {
       name: "Jack",
       profession: "Software engineer"
     }
-
     theFunction.myCall(undefined, "Claude", "mathematician");
     theFunction.myApply(undefined, ["John", "teacher"]);
     theFunction.myBind(undefined)("Lisa", "doctor");
