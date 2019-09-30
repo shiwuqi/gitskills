@@ -25,6 +25,6 @@
 ##### var stateObj = { foo: 'bar' }
 ##### history.pushState(stateObj, null, 'bar.html')
 ##### history.replaceState(stateObj, null, 'bar2.html')
-##### 假设开始是/foo.html页面，上面例子会导致地址栏显示/bar2.html，但是浏览器不会去加载/bar2.html，甚至都不需要检查bar2.html是否存在。假设现在跳转到https://wwww.baidu.com，history.back()，这里，地址栏会显示/bar2.html，再次history.back()，地址栏会显示/foo.html，完全跳过了bar.html
+##### 假设开始是/foo.html页面，上面例子会导致地址栏显示/bar2.html，但是浏览器不会去加载/bar2.html，甚至都不需要检查bar2.html是否存在。假设现在跳转到https://www.baidu.com，history.back()，这里，地址栏会显示/bar2.html，再次history.back()，地址栏会显示/foo.html，完全跳过了bar.html
 
 
