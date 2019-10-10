@@ -1,7 +1,10 @@
 //app.js
+const store = require('./store/index.js');
+
 App({
   onLaunch: function () {
-
+    // 注入store
+    store.install(this);
     // 获取系统信息: 微信版本 高度 宽度
     wx.getSystemInfo({
       success: res => {

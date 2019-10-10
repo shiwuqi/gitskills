@@ -1,5 +1,9 @@
 /* pages/remove/index.wxss */
 
+.cm-list {
+  overflow: hidden;
+}
+
 .cm-list_personal {
   position: relative;
 }
