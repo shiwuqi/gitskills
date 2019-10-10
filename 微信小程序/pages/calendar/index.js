@@ -54,14 +54,5 @@ Page({
    */
   onUnload: function () {
 
-  },
-
-  handleSelectedDay(e) {
-    const { year, month, day } = e.detail
-    this.setData({
-      year,
-      month,
-      day
-    })
   }
 })

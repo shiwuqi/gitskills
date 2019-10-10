@@ -125,9 +125,46 @@ var addDate = function (date, days) {
   return d.getFullYear() + '-' + m + '-' + d.getDate();
 }
 
+/**
+ * 把日期转化成年月日时分秒
+ */
+var formatTime = function (date) {
+  date = new Date(date)
+  var year = date.getFullYear() // 年份
+  var month = date.getMonth() + 1  // 月份
+  var day = date.getDate()  // 日
+  var hour = date.getHours()  // 小时
+  var minute = date.getMinutes()  // 分钟
+  var seconds = date.getSeconds() // 秒
+  var dayNums = date.getDate()  // 目标天所在月有多少天
+  return { year, month, day, hour, minute, seconds, dayNums }
+}
+
+/**
+ * 滑动月份判断选中的日期
+ * preDate：上个目标月选中的某一天
+ * nextDate：目标月的某一天
+ */
+var CheckedMonthDay = function (preDate, nextDate) {
+  var preDateTime = formatTime(preDate);
+  var nextDateTime = formatTime(nextDate);
+  if (preDateTime.day <= 28) {
+    return { year: nextDateTime.year, month: nextDateTime.month, day: preDateTime.day };
+  } else {
+    var nextTotalDay = new Date(nextDateTime.year, nextDateTime.month, 0).getDate(); // 目标月的总天数
+    if (nextTotalDay >= preDateTime.day) {
+      return { year: nextDateTime.year, month: nextDateTime.month, day: preDateTime.day };
+    } else {
+      return { year: nextDateTime.year, month: nextDateTime.month, day: nextTotalDay };
+    }
+  }
+}
+
 module.exports = {
   initDate,
   addZero,
   getWeeks,
   formatMonth,
+  formatTime,
+  CheckedMonthDay,
 }

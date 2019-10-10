@@ -2,8 +2,10 @@
 const {
   initDate,
   addZero,
-  formatMonth
+  formatMonth,
+  CheckedMonthDay
 } = require('../../utils/calendar.js')
+const reg = new RegExp('-', 'g')
 
 Component({
   options: {
@@ -128,50 +130,33 @@ Component({
      * 左右滑动调用的函数
      */
     tapPrev() {
-      const {
-        year,
-        month
-      } = formatMonth({
-        year: this.data.year,
-        month: (Number(this.data.month) - 1)
-      })
-      const calendar = initDate({
-        all: 'all',
-        year,
-        month
-      })
-      this.setData({
-        calendar,
-        year,
-        month
-      })
-      const _data = {
-        changeYear: year,
-        changeMonth: addZero(month),
-      }
+      this.changeCalendarData(-1)
     },
     tapNext() {
+      this.changeCalendarData(1)
+    },
+
+    changeCalendarData(val) {
       const {
         year,
         month
       } = formatMonth({
         year: this.data.year,
-        month: (Number(this.data.month) + 1)
+        month: (Number(this.data.month) + val)
       })
       const calendar = initDate({
         all: 'all',
         year,
         month
       })
+      const checkData = CheckedMonthDay(this.data.selectedDate.replace(reg, '/'), `${year}/${month}/1`)
+      const selectedDate = `${checkData.year}-${addZero(checkData.month)}-${addZero(checkData.day)}`
       this.setData({
         calendar,
         year,
-        month
+        month,
+        selectedDate
       })
-      const _data = {
-        changeYear: year,
-        changeMonth: addZero(month),
-      }
     },
 
     handleClickSelected(e) {
@@ -186,9 +171,6 @@ Component({
       let obj = {}
       if (preornextday === -1) {
         this.tapPrev()
-        // this.triggerEvent('handleChangeMonth', {
-        //   changeYear: year, changeMonth: month
-        // })
       } else if (preornextday === 1) {
         this.tapNext()
       }

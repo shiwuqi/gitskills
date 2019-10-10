@@ -53,7 +53,7 @@ App({
     })
   },
   globalData: {
-    userInfo: {},
+    userInfo: null,
     systemInfo: {}, // 系统基本信息
   }
 })
