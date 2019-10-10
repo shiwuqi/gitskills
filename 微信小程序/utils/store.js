@@ -19,16 +19,16 @@ class Store {
     }
   }
 
+  get state() {
+    return _state;
+  }
+
+  set state(val) {
+    console.warn('Cannot assign directly');
+  }
+
   install(global) {
     global.$store = this;
-    Object.defineProperty(this, 'state', {
-      get() {
-        return _state;
-      },
-      set(newVal) {
-        _state = newVal;
-      }
-    })
   }
 
   walk(data) {
